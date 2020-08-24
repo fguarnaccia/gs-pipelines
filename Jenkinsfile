@@ -3,7 +3,7 @@ pipeline {
   version = "1.2.0"
   suffix = "develop"
   branch = "develop"  
-  }
+    }
   
     agent any 
     stages {
@@ -15,6 +15,7 @@ pipeline {
       stage('Show') { 
             steps {
                   echo suffix
+                  echo env.branch
             }
         }
     }
