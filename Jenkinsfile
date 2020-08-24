@@ -16,7 +16,9 @@ pipeline {
                 }
           
           dir ('Standard') { bat label: 'Create folder ', script: 'mkdir Standard\\Applications\\ERP"' } 
-          dir ('Standard/Applications/ERP') {                 git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/erp.git' } } 
+          dir ('Standard/Applications/ERP') {
+            git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/erp.git' 
+          } 
         }
       stage('Show') { 
             steps {
