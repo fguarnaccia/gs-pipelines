@@ -8,10 +8,16 @@ pipeline {
     stages {
         stage('Pull') { 
             steps {
-                  git 'https://github.com/fguarnaccia/gsmicrologger.git' 
-                  echo suffixz
+                  git config --global user.name "fguarnaccia"
+                  git config --global user.email "CCNET@microarea.it"
+                  git 'https://github.com/fguarnaccia/gsmicrologger.git'  checkout develop
+
             }
         }
-
+      stage('Show') { 
+            steps {
+                  echo suffix
+            }
+        }
     }
 }
