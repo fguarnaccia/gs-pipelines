@@ -8,9 +8,9 @@ pipeline {
     stages {
         stage('Pull') { 
             steps {
-                  git config --global user.name "fguarnaccia"
-                  git config --global user.email "CCNET@microarea.it"
-                  git 'https://github.com/fguarnaccia/gsmicrologger.git'  checkout develop
+                  bat git config --global user.name "fguarnaccia"
+                  bat git config --global user.email "CCNET@microarea.it"
+                  bat git 'https://github.com/fguarnaccia/gsmicrologger.git'  checkout develop
 
             }
         }
