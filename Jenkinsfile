@@ -13,8 +13,8 @@ pipeline {
               bat label: 'Create server folder ', script: 'mkdir Standard\\server"'
               bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
              
-        }
-    
+                }
+            }
         stage('Pull') { 
             steps {
               //git branch: env.branch, credentialsId: 'git:996e1f714b08e971ec79e3bea686287e66441f043177999a13dbc546d8fe402a', url: 'https://github.com/fguarnaccia/gsmicrologger.git'
