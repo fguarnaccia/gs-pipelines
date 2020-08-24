@@ -14,7 +14,7 @@ pipeline {
         }
       stage('Show') { 
             steps {
-                  echo version'-'suffix
+                  echo suffix
             }
         }
     }
