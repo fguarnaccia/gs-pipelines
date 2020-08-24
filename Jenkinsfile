@@ -1,8 +1,8 @@
 pipeline {
   environment {
   version = "1.2.0"
-  suffix = "develop"
-  branch = "develop"  
+  suffix = "developextfunc"
+  branch = "feat/developextfunc"  
     }
   
     agent any 
