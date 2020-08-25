@@ -14,8 +14,11 @@ pipeline {
              // bat label: 'Remove server folder ', script: 'rd Standard\\server" /S /Q'
               //bat label: 'Remove erp folder ', script: 'rd Standard\\Applications\\ERP" /S /Q'
               
-              bat label: 'Create server folder ', returnStatus: true, script: 'mkdir Standard\\server"'
-              bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
+              //bat label: 'Create server folder ', returnStatus: true, script: 'mkdir Standard\\server"'
+              powershell label: 'Create server folder', script: 'if (-not (Test-Path "standard\\tb")) {New-Item -ItemType "directory" -Path "standard\\tb"}'
+              powershell label: 'Create erp folder', script: 'if (-not (Test-Path "Standard\\Applications\\ERP")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\ERP"}'
+              
+              //bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
              
                 }
             }
