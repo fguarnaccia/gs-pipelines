@@ -28,7 +28,7 @@ pipeline {
         stage('Pull2') { 
           
           environment { 
-                branch = 'feat/feature/ext-functions'
+                branch = 'feature/ext-functions'
             }
             steps {
 
