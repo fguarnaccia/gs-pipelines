@@ -3,6 +3,7 @@ pipeline {
   version = "1.2.0"
   suffix = "develop"
   branch = "develop"  
+  tag = "${env.version}-${env.suffix}"
     }
   
     agent any 
@@ -21,10 +22,14 @@ pipeline {
              // bat label: 'Create folder ', script: 'mkdir Standard\\server"'
              // bat label: 'Create folder ', script: 'mkdir Standard\\Applications\\ERP"'
               dir ('Standard/server') {
-                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/tbw-server.git' }
+                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-server.git' }
                 }
                 }
         stage('Pull2') { 
+          
+          environment { 
+                branch = 'feat/feature/ext-functions'
+            }
             steps {
 
               dir ('Standard/Applications/ERP') {
@@ -37,6 +42,8 @@ pipeline {
             steps {
                   echo suffix
                   echo env.branch
+                  echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                  echo tag  
             }
         }
     }
