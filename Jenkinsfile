@@ -28,7 +28,7 @@ pipeline {
             steps {
 
               dir ('Standard/Applications/ERP') {
-                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/erp.git' 
+                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/erp.git' 
                  } 
         }
         }
