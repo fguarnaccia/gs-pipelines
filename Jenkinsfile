@@ -18,13 +18,13 @@ pipeline {
               powershell label: 'Create Apps  folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'       
                 }
             }
-        stage('Pull01) { 
+        stage('PullUno) { 
             steps {
               dir ('Standard/server') {
                 git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-server.git' }
                 }
                 }
-        stage('Pull02') { 
+        stage('PullDue') { 
           
           environment { 
                 branch = 'feature/ext-functions'
