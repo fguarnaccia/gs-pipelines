@@ -11,6 +11,9 @@ pipeline {
             stage('PrepareFolder') { 
             steps {
               
+              bat label: 'Remove server folder ', script: 'rd Standard\\server"'
+              bat label: 'Remove erp folder ', script: 'rd Standard\\Applications\\ERP"'
+              
               bat label: 'Create server folder ', script: 'mkdir Standard\\server"'
               bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
              
