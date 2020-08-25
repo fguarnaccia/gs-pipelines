@@ -10,28 +10,21 @@ pipeline {
     stages {
             stage('PrepareFolder') { 
             steps {
-              
-             // bat label: 'Remove server folder ', script: 'rd Standard\\server" /S /Q'
-              //bat label: 'Remove erp folder ', script: 'rd Standard\\Applications\\ERP" /S /Q'
               cleanWs deleteDirs: true
               //bat label: 'Create server folder ', returnStatus: true, script: 'mkdir Standard\\server"'
               powershell label: 'Create server folder', script: 'if (-not (Test-Path "standard\\server")) {New-Item -ItemType "directory" -Path "standard\\server"}'
-              powershell label: 'Create erp folder', script: 'if (-not (Test-Path "Standard\\Applications\\ERP")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\ERP"}'
-              
-              //bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
-             
+              powershell label: 'Create Erp folder', script: 'if (-not (Test-Path "Standard\\Applications\\ERP")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\ERP"}'
+              powershell label: 'Create Apps  folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'
+              powershell label: 'Create Apps  folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'       
                 }
             }
         stage('Pull') { 
             steps {
-              //git branch: env.branch, credentialsId: 'git:996e1f714b08e971ec79e3bea686287e66441f043177999a13dbc546d8fe402a', url: 'https://github.com/fguarnaccia/gsmicrologger.git'
-             // bat label: 'Create folder ', script: 'mkdir Standard\\server"'
-             // bat label: 'Create folder ', script: 'mkdir Standard\\Applications\\ERP"'
               dir ('Standard/server') {
                 git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-server.git' }
                 }
                 }
-        stage('Pull2') { 
+        stage('Pull') { 
           
           environment { 
                 branch = 'feature/ext-functions'
