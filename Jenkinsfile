@@ -3,7 +3,7 @@ pipeline {
   version = "1.2.0"
   suffix = "develop"
   branch = "develop"  
-  tag = "${env.version}-${env.suffix}"
+  tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
     }
   
     agent any 
@@ -14,7 +14,7 @@ pipeline {
              // bat label: 'Remove server folder ', script: 'rd Standard\\server" /S /Q'
               //bat label: 'Remove erp folder ', script: 'rd Standard\\Applications\\ERP" /S /Q'
               
-              bat label: 'Create server folder ', script: 'mkdir Standard\\server"'
+              bat label: 'Create server folder ', returnStatus: true, script: 'mkdir Standard\\server"'
               bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
              
                 }
@@ -43,9 +43,7 @@ pipeline {
         
       stage('Show') { 
             steps {
-                  echo suffix
-                  echo env.branch
-                  echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                  echo "Built ${env.tag}"
                   echo tag  
             }
         }
