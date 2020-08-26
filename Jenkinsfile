@@ -2,7 +2,7 @@ pipeline {
   environment {
   version = "1.2.0"
   suffix = "developextfunc"
-  branch = "feat/developextfunc"  
+  branch = "develop"  
   tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
 
     }
