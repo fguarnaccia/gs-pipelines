@@ -17,6 +17,9 @@ pipeline {
               powershell label: 'Create Apps folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'
             }
           }
+      
+      stage ('Pull da git') {
+        parallel{
         stage('Pull01') { 
             steps {
               powershell label: 'Create server folder', script: 'if (-not (Test-Path "Standard\\server")) {New-Item -ItemType "directory" -Path "standard\\server"}'
@@ -30,6 +33,9 @@ pipeline {
              dir ('Standard/Applications/ERP') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/erp.git' } 
             }
         }
+          
+        }
+      }
       stage('Post') { 
             steps {
                   echo "Built ${env.tag}" 
