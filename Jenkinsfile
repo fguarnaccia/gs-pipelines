@@ -37,12 +37,25 @@ pipeline {
          stage('Pull03') { 
           
             steps {
-             powershell label: 'Create client folder', script: 'if (-not (Test-Path "Standard\\client")) {New-Item -ItemType "directory" -Path "Standard\\client"}'
-             dir ('Standard/client') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-client.git' } 
+             powershell label: 'Create TaskBuilder folder', script: 'if (-not (Test-Path "Standard\\client")) {New-Item -ItemType "directory" -Path "Standard\\TaskBuilder"}'
+             dir ('Standard/TaskBuilder') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-TaskBuilder.git' } 
             }
         }
           
           
+        }
+      }
+      
+      stage ('FrontEnd AOT') {
+        parallel{
+               stage('Pull01') { 
+          
+            steps {
+             powershell label: 'Create client folder', script: 'if (-not (Test-Path "Standard\\client")) {New-Item -ItemType "directory" -Path "Standard\\client"}'
+             dir ('Standard/client') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-client.git' } 
+            }
+        }
+      
         }
       }
       stage('Post') { 
