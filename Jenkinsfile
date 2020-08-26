@@ -3,37 +3,45 @@ pipeline {
   version = "1.2.0"
   suffix = "developextfunc"
   branch = "feat/developextfunc"  
+  tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
+
     }
   
     agent any 
     stages {
             stage('PrepareFolder') { 
             steps {
-              
-              bat label: 'Create server folder ', script: 'mkdir Standard\\server"'
-              bat label: 'Create erp folder ', script: 'mkdir Standard\\Applications\\ERP"'
-             
+              cleanWs deleteDirs: true
+              //bat label: 'Create server folder ', returnStatus: true, script: 'mkdir Standard\\server"'
+              powershell label: 'Create server folder', script: 'if (-not (Test-Path "standard\\server")) {New-Item -ItemType "directory" -Path "standard\\server"}'
+              powershell label: 'Create Erp folder', script: 'if (-not (Test-Path "Standard\\Applications\\ERP")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\ERP"}'
+              powershell label: 'Create Apps  folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'
+              powershell label: 'Create Apps  folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'       
                 }
             }
-        stage('Pull') { 
+        stage('Pull01') { 
             steps {
               dir ('Standard/server') {
-                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/tbw-server.git' }
+                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-server.git' }
                 }
                 }
-        stage('Pull2') { 
+        stage('Pull02') { 
+          
+          environment { 
+                branch = 'feature/ext-functions'
+            }
             steps {
 
               dir ('Standard/Applications/ERP') {
-                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://9f55c6ff55ec8e7e1da54cf7a5819346f1d968b2@github.com/Microarea/erp.git' 
+                git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/erp.git' 
                  } 
         }
         }
         
       stage('Show') { 
             steps {
-                  echo suffix
-                  echo env.branch
+                  echo "Built ${env.tag}"
+                  echo tag  
             }
         }
     }
