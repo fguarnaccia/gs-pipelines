@@ -26,9 +26,6 @@ pipeline {
                 }
         stage('Pull02') { 
           
-          environment { 
-                branch = 'feature/ext-functions'
-            }
             steps {
 
               dir ('Standard/Applications/ERP') {
