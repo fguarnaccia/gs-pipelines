@@ -43,8 +43,7 @@ pipeline {
                      }
                  }
               }     
-            }  
-}            
+            }             
           stage('PostandTag') { 
                 steps {
                       echo "Built ${env.tag}" 
