@@ -30,7 +30,7 @@ pipeline {
                     steps {
                       echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                       powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "Standard\${env.repofolder}"}'
-                      dir ("Standard/ ${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                      dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                  }  
                stage('Pull02') { 
                     environment { 
