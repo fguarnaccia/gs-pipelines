@@ -28,7 +28,7 @@ pipeline {
                       repofolder = "Taskbuilder"
                       }             
                     steps {
-                     powershell label: "Create ${env.repofolder} folder", script: 'if (-not (Test-Path "Standard\\client")) {New-Item -ItemType "directory" -Path "Standard\\ ${env.repofolder}"}'
+                     powershell label: 'Create ${env.repofolder} folder', script: 'if (-not (Test-Path "Standard\\client")) {New-Item -ItemType "directory" -Path "Standard\\ ${env.repofolder}"}'
                      dir ("Standard/ ${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/ ${env.repofolder}.git" } }
                  }  
                 stage('Pull02') { 
