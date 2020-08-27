@@ -40,7 +40,7 @@ pipeline {
                     steps {
                         echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                         powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                        dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                        dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }     
                stage('Pull03') { 
                     environment { 
@@ -50,7 +50,7 @@ pipeline {
                     steps {
                        echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                       dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                       dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
                stage('Pull04') {               
                     environment { 
@@ -60,7 +60,7 @@ pipeline {
                     steps {
                        echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
                 stage('Pull05') {               
                     environment { 
@@ -70,7 +70,7 @@ pipeline {
                     steps {
                        echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
  
                 }
                 stage('Pull06') {               
@@ -81,7 +81,7 @@ pipeline {
                     steps {
                        echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                       dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
                 stage('Pull07') {               
                     environment { 
@@ -91,7 +91,7 @@ pipeline {
                     steps {
                        echo "Create ${env.repofolder} folder and pull ${env.repofolder}"
                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
-                       dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/${env.gitrepo}.git' } }
+                       dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
 
 
