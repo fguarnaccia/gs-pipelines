@@ -49,17 +49,17 @@ pipeline {
                 stage('Pull05') {               
                     steps {
                      powershell label: 'Create MDC folder', script: 'if (-not (Test-Path "Standard\\Applications\\MDC")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\MDC"}'
-                     dir ('Standard/Applications/ERP') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/MDC.git' } }
+                     dir ('Standard/Applications/MDC') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/MDC.git' } }
                 }
                 stage('Pull06') {               
                     steps {
                      powershell label: 'Create TBF folder', script: 'if (-not (Test-Path "Standard\\Applications\\TBF")) {New-Item -ItemType "directory" -Path "Standard\\Applications\\TBF"}'
-                     dir ('Standard/Applications/ERP') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/TBF.git' } }
+                     dir ('Standard/Applications/TBF') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/TBF.git' } }
                 }
                 stage('Pull07') {               
                     steps {
                      powershell label: 'Create micro-database-management folder', script: 'if (-not (Test-Path "Standard\\micro-database-management")) {New-Item -ItemType "directory" -Path "Standard\\micro-database-management"}'
-                     dir ('Standard/Applications/ERP') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/TBF.git' } }
+                     dir ('Standard/micro-database-management') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/micro-database-management.git' } }
                 }
 
 
