@@ -48,4 +48,4 @@ pipeline {
                       echo "Built ${env.tag}" 
                 }
             }
-  }
+    }}
