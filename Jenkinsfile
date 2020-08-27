@@ -42,8 +42,7 @@ pipeline {
                      dir ('Standard/client') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-client.git' }  }
                      }
                  }
-              }     
-            }             
+              }                
           stage('PostandTag') { 
                 steps {
                       echo "Built ${env.tag}" 
