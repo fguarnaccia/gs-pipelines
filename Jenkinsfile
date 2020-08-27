@@ -20,7 +20,7 @@ pipeline {
             parallel{
                 stage('Pull01') { 
                      agent {
-                        label "spp-m4c-001"
+                        label "spp-m4c-002"
                     }
                     steps {
                         powershell label: 'Create server folder', script: 'if (-not (Test-Path "Standard\\server")) {New-Item -ItemType "directory" -Path "standard\\server"}'
