@@ -19,6 +19,9 @@ pipeline {
           stage('Pull da git') {
             parallel{
                 stage('Pull01') { 
+                     agent {
+                        label "spp-m4c-001"
+                    }
                     steps {
                         powershell label: 'Create server folder', script: 'if (-not (Test-Path "Standard\\server")) {New-Item -ItemType "directory" -Path "standard\\server"}'
                         dir ('Standard/server') { git branch: env.branch, credentialsId: 'githubccnet', url: 'https://github.com/Microarea/tbw-server.git' }
