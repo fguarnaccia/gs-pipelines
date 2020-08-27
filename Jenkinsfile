@@ -4,7 +4,7 @@ pipeline {
       suffix = "develop"
       branch = "develop"  
       tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
-      tagongit = 'false'
+      tagongit = 'true'
       commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
     }
   
