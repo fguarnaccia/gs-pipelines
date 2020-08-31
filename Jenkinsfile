@@ -28,8 +28,7 @@ pipeline {
                         repofolder = "Taskbuilder"
                       }             
                     steps {
-                      echo "Create ${env.repofolder} folder and pull ${env.gitrepo}"
-                      powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "Standard\${env.repofolder}"}'
+                      powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "Standard\${env.repofolder}"}'
                       dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                  }  
                stage('Pull02') { 
@@ -39,7 +38,7 @@ pipeline {
                       }   
                     steps {
                         echo "Create ${env.repofolder} folder and pull ${env.gitrepo}"
-                        powershell label: '', script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
+                        powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\${env.repofolder}"}'
                         dir ("Standard/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }     
                stage('Pull03') { 
