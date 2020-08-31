@@ -4,6 +4,7 @@ pipeline {
       suffix = "develop"
       branch = "develop"  
       tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
+	  internationalstudiopath ="C:\Program Files (x86)\Microarea\InternationalStudio\InternationalStudio.exe"
       tagongit = 'true'
       commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
     }
@@ -188,7 +189,80 @@ pipeline {
 				
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
-              }                
+              }    
+
+          stage('Build Dictionary') {
+            parallel{
+                stage('Dict-01') {
+                    environment { 
+                        gitrepo = "tbw-taskBuilder"
+                        repofolder = "Taskbuilder"
+                      }             
+                    steps {                    
+                      dir ("Standard/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} TaskBuilderWeb.tblsln'} }
+                 }
+                stage('Dict-02') {
+                    environment { 
+                        gitrepo = "erp"
+                        repofolder = "erp"
+                      }             
+                    steps {                    
+                      dir ("Standard/Applications/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} "${env.gitrepo.tblsln"'} }
+                 } 				 
+                stage('Dict-03') {
+                    environment { 
+                        gitrepo = "tbw-server"
+                        repofolder = "server"
+                      }             
+                    steps {                    
+                      dir ("Standard/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} server.tblsln'} }
+                 }    
+                stage('Dict-04') {
+                    environment { 
+                        gitrepo = "tbw-client"
+                        repofolder = "server"
+                      }             
+                    steps {                    
+                      dir ("Standard/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} client.tblsln'} }
+                 }    
+                stage('Dict-05') {
+                    environment { 
+                        gitrepo = "MDC"
+                        repofolder = "MDC"
+                      }             
+                    steps {                    
+                      dir ("Standard/Applications/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} "${env.gitrepo.tblsln"'} }
+                 } 
+                stage('Dict-06') {
+                    environment { 
+                        gitrepo = "Retail"
+                        repofolder = "Retail"
+                      }             
+                    steps {                    
+                      dir ("Standard/Applications/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} "${env.gitrepo.tblsln"'} }
+                 } 
+                stage('Dict-07') {
+                    environment { 
+                        gitrepo = "WMS"
+                        repofolder = "WMS"
+                      }             
+                    steps {                    
+                      dir ("Standard/Applications/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} "${env.gitrepo.tblsln"'} }
+                 } 
+                stage('Dict-08') {
+                    environment { 
+                        gitrepo = "WMSRetail"
+                        repofolder = "WMSRetail"
+                      }             
+                    steps {                    
+                      dir ("Standard/Applications/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '${env.internationalstudiopath} "${env.gitrepo.tblsln"'} }
+                 } 				
+				//le due parentesi che seguono chiudono lo stage parallel
+                 }
+              }
+
+
+			  
           stage('PostandTag') {
                 when {
                   environment name: 'tagongit', value: 'true'
