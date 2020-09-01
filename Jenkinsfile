@@ -56,7 +56,7 @@ pipeline {
                         repofolder = "ERP"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
                 stage('Pull05') {               
@@ -65,7 +65,7 @@ pipeline {
                         repofolder = "MDC"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
  
                 }
@@ -75,7 +75,7 @@ pipeline {
                         repofolder = "TBF"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard/Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
                 stage('Pull07') {               
@@ -93,7 +93,7 @@ pipeline {
                         repofolder = "M4_dashboard"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
 				stage('Pull09') {               
@@ -102,7 +102,7 @@ pipeline {
                         repofolder = "Retail"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
 				stage('Pull10') {               
@@ -111,7 +111,7 @@ pipeline {
                         repofolder = "WMS"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }	
 				stage('Pull11') {               
@@ -120,7 +120,7 @@ pipeline {
                         repofolder = "WMSRetail"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }				
 				stage('Pull12') {               
@@ -129,7 +129,7 @@ pipeline {
                         repofolder = "MyMagoStudio"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }
 				stage('Pull13') {               
@@ -165,7 +165,7 @@ pipeline {
                         repofolder = "erp-services"
                       }   
                     steps {
-                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\Applications\${env.repofolder}"}'
+                       powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "Standard\Applications\\${env.repofolder}")) {New-Item -ItemType "directory" -Path "standard\\Applications\\${env.repofolder}"}'
                        dir ("Standard//Applications/${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }				
 				stage('Pull17') {               
