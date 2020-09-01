@@ -266,7 +266,7 @@ pipeline {
                     environment { 
                         gitrepo = "tbw-taskBuilder"
                         repofolder = "Taskbuilder"
-			MSBUILD = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin"
+			MSBUILD = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin"
     			CONFIG = 'Release'
     			PLATFORM = 'x64'
                       }             
