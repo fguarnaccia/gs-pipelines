@@ -265,13 +265,13 @@ pipeline {
                 stage('Build-01') {
                     environment { 
                         gitrepo = "tbw-taskBuilder"
-                        repofolder = "Taskbuilder"
+                        repofolder = "Standard\\Taskbuilder"
 			MSBUILD = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin"
     			CONFIG = 'Release'
     			PLATFORM = 'x64'
                       }             
                     steps {     
-		      	  bat """'Standard\\TaskBuilder\\OtherComponents\\Nuget\\nuget.exe' restore "Standard\\${env.repofolder}\\${env.repofolder}.sln"""
+		      	 dir ("${env.repofolder}") {bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"}
 			   				
 				//bat "\"${tool 'VisualStudio 2019'}\msbuild\" "Standard\${env.repofolder}\${env.repofolder}.sln" -t:rebuild -p:Configuration=Release -p:Platform=\"x64\"
 			       bat "\"${MSBUILD}\"   Standard\${env.repofolder}\${env.repofolder}.sln -t:rebuild -p:Configuration=${env.CONFIG} -p:Platform=${env.PLATFORM}"
