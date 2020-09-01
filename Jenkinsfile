@@ -260,7 +260,23 @@ pipeline {
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
               }
-
+          stage('Build C++ Repos) {
+            parallel{
+                stage('Build-01') {
+                    environment { 
+                        gitrepo = "tbw-taskBuilder"
+                        repofolder = "Taskbuilder"
+                      }             
+                    steps {     
+						script{					
+							bat "\"${tool 'VisualStudio 2019'}\msbuild\" Standard\${env.repofolder}\${env.repofolder}.sln SolutionName.sln /p:Configuration=Release /p:Platform=\"x64\" /p:ProductVersion=${env.version).${env.BUILD_NUMBER}"
+						}			  
+					  
+                 }
+			
+				//le due parentesi che seguono chiudono lo stage parallel
+                 }
+              }
 
 			  
           stage('PostandTag') {
