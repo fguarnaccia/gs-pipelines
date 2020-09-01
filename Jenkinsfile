@@ -268,9 +268,10 @@ pipeline {
                         repofolder = "Taskbuilder"
                       }             
                     steps {     
-						script{					
-							bat "\"${tool 'VisualStudio 2019'}\msbuild\" Standard\${env.repofolder}\${env.repofolder}.sln SolutionName.sln /p:Configuration=Release /p:Platform=\"x64\" /p:ProductVersion=${env.version).${env.BUILD_NUMBER}"
-						}			  
+		      	  bat "Standard\TaskBuilder\OtherComponents\Nuget\nuget.exe restore Standard\${env.repofolder}\${env.repofolder}.sln"
+			   script{					
+				bat "\"${tool 'VisualStudio 2019'}\msbuild\" Standard\${env.repofolder}\${env.repofolder}.sln SolutionName.sln /p:Configuration=Release /p:Platform=\"x64\" /p:ProductVersion=${env.version).${env.BUILD_NUMBER}"
+			   }			  
 					  
                  }
 			
