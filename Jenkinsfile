@@ -260,7 +260,7 @@ pipeline {
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
               }
-          stage('Build C++ Repos) {
+          stage('Build C++ Repos') {
             parallel{
                 stage('Build-01') {
                     environment { 
