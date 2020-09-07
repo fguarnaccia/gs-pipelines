@@ -202,7 +202,7 @@ pipeline {
                         repofolder = "Taskbuilder"
                       }             
                     steps {                    
-                      dir ("Standard/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" TaskBuilderWeb.tblsln'} }
+                      dir ("Standard/${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath} TaskBuilderWeb.tblsln"} }
                  }
                 stage('Dict-02') {
                     environment { 
