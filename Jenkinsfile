@@ -126,7 +126,7 @@ pipeline {
                        powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
                        dir ("{env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                 }				
-		tage('Pull MyMagoStudio') {               
+		stage('Pull MyMagoStudio') {               
                     environment { 
                         gitrepo = "MyMagoStudio"
                         repofolder = "Standard\\Applications\\MyMagoStudio"
