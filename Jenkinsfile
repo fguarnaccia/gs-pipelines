@@ -1,7 +1,7 @@
 pipeline {
   environment   {
       version = "1.2.0"
-      suffix = "develop"
+      suffix = "devnewpipe"
       branch = "develop"  
       tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
