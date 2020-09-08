@@ -204,7 +204,7 @@ pipeline {
                     steps {                    
                       //dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath} TaskBuilderWeb.tblsln"'} }
                         dir ("${env.repofolder}") {
-                                      // bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln""" 
+                                       bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln""" 
                                      //bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln""" 
                     }
                  }
