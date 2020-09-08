@@ -6,9 +6,10 @@ pipeline {
       tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
       msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
-      CONFIG = 'Release'
-      PLATFORM = 'x64'
-      tagongit = 'true'
+      config = 'Release'
+      platform = 'x64'
+      buildtype + "rebuild"
+      tagongit = 'true'     
       commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
     }
   
@@ -273,7 +274,7 @@ pipeline {
                  }
               }
           stage('Build C++ Repos') {
-            parallel{
+            stages{
                 stage('Build Taskbuilder') {
                     environment { 
                         gitrepo = "tbw-taskBuilder"
@@ -282,14 +283,101 @@ pipeline {
                     steps {     
                       dir ("${env.repofolder}") {
                                 bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"
-                                bat """\"${msbuildpath}\"  taskbuilder.sln -t:rebuild -p:Configuration=${env.CONFIG} -p:Platform=${env.PLATFORM}"""
+                                bat """\"${msbuildpath}\"  taskbuilder.sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
 			
-				//le due parentesi che seguono chiudono lo stage parallel
+                stage('Build erp') {
+                    environment { 
+                        gitrepo = "erp"
+                        repofolder = "Standard\\Applications\\erp"		    			
+                      }             
+                    steps {     
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore "${env.gitrepo}".sln"
+                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                              }
+			              }			  
+					      }
+                stage('Build mdc') {
+                    environment { 
+                        gitrepo = "mdc"
+                        repofolder = "Standard\\Applications\\mdc"		    			
+                      }             
+                    steps {     
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore "${env.gitrepo}".sln"
+                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                              }
+			              }			  
+					      }
+
+                stage('Build wms') {
+                    environment { 
+                        gitrepo = "wms"
+                        repofolder = "Standard\\Applications\\wms"		    			
+                      }             
+                    steps {     
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore "${env.gitrepo}".sln"
+                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                              }
+			              }			  
+					      }
+
+                stage('Build retail') {
+                    environment { 
+                        gitrepo = "retail"
+                        repofolder = "Standard\\Applications\\retail"		    			
+                      }             
+                    steps {     
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore "${env.gitrepo}".sln"
+                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                              }
+			              }			  
+					      }
+                stage('Build wmsretail') {
+                    environment { 
+                        gitrepo = "wmsretail"
+                        repofolder = "Standard\\Applications\\wmsretail"		    			
+                      }             
+                    steps {     
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore "${env.gitrepo}".sln"
+                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                              }
+			              }			  
+					      }
+
+				//le due parentesi che seguono chiudono lo stage sequential (stages)
                  }
               }
+
+
+
+
+
+          stage('Publish .NetCore Services') {
+            parallel{
+                stage('Publish account-manager') {
+                    environment { 
+                        gitrepo = "account-manager"
+                        repofolder = "standard\\server"		 
+                        outputfolder = "standard\\Taskbuilder\WebFramework\\${env.gitrepo}"	   			
+                      }             
+                    steps {     
+                            bat """dotnet publish --framework netcoreapp3.1 "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}" -c release -o  "${env.WORKSPACE}\\${env.repofolder}\\${env.outputfolder} p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}  """
+			              }			  
+					      }
+
+
+				    //le due parentesi che seguono chiudono lo stage parallel
+                 }
+              }
+
+
 
 			  
           stage('PostandTag') {
