@@ -202,7 +202,7 @@ pipeline {
                         repofolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln"""    } 
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\TaskBuilderWeb.tblsln"""
                         }
                  }
                 stage('Dict erp') {
@@ -211,7 +211,7 @@ pipeline {
                         repofolder = "Standard\\Applications\\erp"
                       }             
                     steps {                    
-                            dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  } 
+                            bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
                           }
                  } 				 
                 stage('Dict server') {
@@ -220,7 +220,7 @@ pipeline {
                         repofolder = "Standard\\server"
                       }             
                     steps {                    
-                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" server.tblsln"""    } 
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\server.tblsln"""
                         }
                 }    
                 stage('Dict client') {
@@ -229,7 +229,7 @@ pipeline {
                         repofolder = "Standard\\client"
                       }             
                     steps {                    
-                       dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" client.tblsln"""    } 
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\client.tblsln"""
                        }
                  }    
                 stage('Dict MDC') {
@@ -239,7 +239,7 @@ pipeline {
                       }             
                     steps {                    
                         //dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\mdc.tblsln""" 
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln""" 
                         }
                  } 
                 stage('Dict Retail') {
@@ -248,7 +248,7 @@ pipeline {
                         repofolder = "Standard\\Applications\\Retail"
                       }             
                     steps {                    
-                          dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
                        }
                  } 
                 stage('Dict WMS') {
@@ -257,7 +257,7 @@ pipeline {
                         repofolder = "Standard\\Applications\\WMS"
                       }             
                     steps {                    
-                          dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                          bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
                        }
                  } 
                 stage('Dict WMSRetail') {
@@ -266,7 +266,7 @@ pipeline {
                         repofolder = "Standard\\Applications\\WMSRetail"
                       }             
                     steps {                    
-                         dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
                        }
                  } 				
 				//le due parentesi che seguono chiudono lo stage parallel
@@ -280,17 +280,12 @@ pipeline {
                         repofolder = "Standard\\Taskbuilder"		    			
                       }             
                     steps {     
-		      	 dir ("${env.repofolder}") {bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"
-						   bat """\"${msbuildpath}\"  taskbuilder.sln -t:rebuild -p:Configuration=${env.CONFIG} -p:Platform=${env.PLATFORM}"""
-						   }
-			   				
-				//bat "\"${tool 'VisualStudio 2019'}\msbuild\" "Standard\${env.repofolder}\${env.repofolder}.sln" -t:rebuild -p:Configuration=Release -p:Platform=\"x64\"
-			       
-			       
-
-			   }			  
-					  
-                 }
+                      dir ("${env.repofolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"
+                                bat """\"${msbuildpath}\"  taskbuilder.sln -t:rebuild -p:Configuration=${env.CONFIG} -p:Platform=${env.PLATFORM}"""
+                              }
+			              }			  
+					      }
 			
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
