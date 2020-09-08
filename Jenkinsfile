@@ -238,7 +238,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\MDC"
                       }             
                     steps {                    
-                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                        //dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\mdc.tblsln""" 
                         }
                  } 
                 stage('Dict Retail') {
@@ -276,9 +277,7 @@ pipeline {
                 stage('Build Taskbuilder') {
                     environment { 
                         gitrepo = "tbw-taskBuilder"
-                        repofolder = "Standard\\Taskbuilder"
-			
-    			
+                        repofolder = "Standard\\Taskbuilder"		    			
                       }             
                     steps {     
 		      	 dir ("${env.repofolder}") {bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"
