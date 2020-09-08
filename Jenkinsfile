@@ -6,6 +6,7 @@ pipeline {
       tag = "${env.version}.${env.BUILD_ID}-${env.suffix}"
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
       msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
+      nugetpath = "${env.WORKSPACE}\\Standard\\Taskbuilder\\OtherComponents\\Nuget\\nuget.exe"
       config = 'Release'
       platform = 'x64'
       buildtype = "rebuild"
@@ -295,7 +296,7 @@ pipeline {
                       }             
                     steps {     
                       dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.gitrepo}.sln"
+                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
                                 bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
@@ -307,7 +308,7 @@ pipeline {
                       }             
                     steps {     
                       dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.gitrepo}.sln"
+                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
                                 bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
@@ -320,7 +321,7 @@ pipeline {
                       }             
                     steps {     
                       dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.gitrepo}.sln"
+                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
                                 bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
@@ -333,7 +334,7 @@ pipeline {
                       }             
                     steps {     
                       dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.gitrepo}.sln"
+                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
                                 bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
@@ -345,7 +346,7 @@ pipeline {
                       }             
                     steps {     
                       dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.gitrepo}.sln"
+                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
                                 bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
