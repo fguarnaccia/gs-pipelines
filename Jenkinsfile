@@ -202,11 +202,7 @@ pipeline {
                         repofolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                      //dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath} TaskBuilderWeb.tblsln"'} }
-                        dir ("${env.repofolder}") {
-                                       bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln""" 
-                                     //bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln""" 
-                    }
+                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln"""    }
                  }
                 stage('Dict erp') {
                     environment { 
@@ -214,7 +210,7 @@ pipeline {
                         repofolder = "Standard\\Applications\\erp"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" "${env.gitrepo}.tblsln"'} }
+                            dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
                  } 				 
                 stage('Dict server') {
                     environment { 
@@ -222,15 +218,16 @@ pipeline {
                         repofolder = "Standard\\server"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath} server.tblsln"'} }
-                 }    
+                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" server.tblsln"""    }
+                          }    
                 stage('Dict client') {
                     environment { 
                         gitrepo = "tbw-client"
                         repofolder = "Standard\\client"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath} client.tblsln"'} }
+                       dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" client.tblsln"""    }
+                       }
                  }    
                 stage('Dict MDC') {
                     environment { 
@@ -238,7 +235,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\MDC"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" "${env.gitrepo}.tblsln"'} }
+                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                        }
                  } 
                 stage('Dict Retail') {
                     environment { 
@@ -246,7 +244,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\Retail"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" "${env.gitrepo}.tblsln"'} }
+                          dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                       }
                  } 
                 stage('Dict WMS') {
                     environment { 
@@ -254,7 +253,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\WMS"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" "${env.gitrepo}.tblsln"'} }
+                          dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                       }
                  } 
                 stage('Dict WMSRetail') {
                     environment { 
@@ -262,7 +262,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\WMSRetail"
                       }             
                     steps {                    
-                      dir ("${env.repofolder}") {powershell label: "Build dictionary for ${env.gitrepo}.git", script: '"${env.internationalstudiopath}" "${env.gitrepo}.tblsln"'} }
+                         dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                       }
                  } 				
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
