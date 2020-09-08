@@ -202,7 +202,8 @@ pipeline {
                         repofolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln"""    }
+                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" TaskBuilderWeb.tblsln"""    } 
+                        }
                  }
                 stage('Dict erp') {
                     environment { 
@@ -210,7 +211,8 @@ pipeline {
                         repofolder = "Standard\\Applications\\erp"
                       }             
                     steps {                    
-                            dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
+                            dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  } 
+                          }
                  } 				 
                 stage('Dict server') {
                     environment { 
@@ -218,15 +220,16 @@ pipeline {
                         repofolder = "Standard\\server"
                       }             
                     steps {                    
-                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" server.tblsln"""    }
-                          }    
+                        dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" server.tblsln"""    } 
+                        }
+                }    
                 stage('Dict client') {
                     environment { 
                         gitrepo = "tbw-client"
                         repofolder = "Standard\\client"
                       }             
                     steps {                    
-                       dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" client.tblsln"""    }
+                       dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" client.tblsln"""    } 
                        }
                  }    
                 stage('Dict MDC') {
@@ -305,4 +308,3 @@ pipeline {
                 }
             }
     }}
-}
