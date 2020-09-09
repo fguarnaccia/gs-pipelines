@@ -369,7 +369,7 @@ pipeline {
                         outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.gitrepo}"	   			
                       }             
                     steps {     
-                            bat """dotnet publish --framework netcoreapp3.1 "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}" -c release -o  "${env.WORKSPACE}\\${env.repofolder}\\${env.outputfolder} p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}  """
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo} -c release -o  ${env.WORKSPACE}\\${env.repofolder}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
 			              }			  
 					      }
 
