@@ -364,13 +364,15 @@ pipeline {
             parallel{
                 stage('Publish account-manager') {
                     environment { 
-                        gitrepo = "account-manager"
-                        repofolder = "standard\\server"		 
-                        outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.gitrepo}"	   			
+                        svcname = "account-manager"
+                        svcfolder = "standard\\server"		 
+                        outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.svcname}"	   			
                       }             
                     steps {     
-                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo} -c release -o  ${env.WORKSPACE}\\${env.repofolder}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
-			              }			  
+                            dir ("${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}") {bat "del web.config"}
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname} -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
+			              //da provare in un prossimo passo -r linux-x64 -p:Version=1.2.0.64,AssemblyVersion=1.2.0.64  --no-self-contained
+                    }			  
 					      }
 
 
