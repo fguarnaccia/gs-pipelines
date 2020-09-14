@@ -424,7 +424,7 @@ pipeline {
                   
                 {
                     agent { label 'spp-m4c-002' }  
-
+                  stage ('') {}
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
@@ -439,7 +439,7 @@ pipeline {
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
 					      }
-
+            }
                 stage('menu-service') 
                   
                 {
