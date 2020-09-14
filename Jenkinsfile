@@ -424,7 +424,7 @@ pipeline {
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	  			
                       }             
                     steps {    
@@ -441,7 +441,7 @@ pipeline {
                     environment { 
                         svcname = "menu-service"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	   			
                                  }             
                     steps {    
@@ -477,7 +477,7 @@ pipeline {
                     environment { 
                         svcname = "tbw-taskbuilder"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	   			
                                  }             
                     steps {    
