@@ -416,10 +416,12 @@ pipeline {
                  }
               }
 
-          stage('Create Docker images') {
+          stage('Create Docker images')
+          agent { label 'spp-m4c-002' }
+           {
             parallel{
                 stage('account-manager') 
-                   agent { label 'spp-m4c-002' }
+                  
                 {
                     environment { 
                         svcname = "account-manager"
@@ -436,7 +438,7 @@ pipeline {
                     }			  
 					      }
                 stage('menu-service') 
-                   agent { label 'spp-m4c-002' }
+                  
                 {
                     environment { 
                         svcname = "menu-service"
@@ -454,7 +456,7 @@ pipeline {
 					      }
 
                 stage('micro-database-management') 
-                   agent { label 'spp-m4c-002' }
+                   
                 {
                     environment { 
                         svcname = "micro-database-management"
@@ -472,7 +474,7 @@ pipeline {
 					      }
 
                 stage('tbw-taskbuilder') 
-                   agent { label 'spp-m4c-002' }
+                   
                 {
                     environment { 
                         svcname = "tbw-taskbuilder"
