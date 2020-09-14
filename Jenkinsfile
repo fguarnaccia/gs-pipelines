@@ -417,12 +417,14 @@ pipeline {
               }
 
           stage('Create Docker images')
-          agent { label 'spp-m4c-002' }
+          
            {
             parallel{
                 stage('account-manager') 
                   
                 {
+                    agent { label 'spp-m4c-002' }  
+
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
@@ -437,9 +439,12 @@ pipeline {
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
 					      }
+
                 stage('menu-service') 
                   
                 {
+                    agent { label 'spp-m4c-002' }  
+
                     environment { 
                         svcname = "menu-service"
                         svcfolder = "standard\\server"
@@ -458,6 +463,9 @@ pipeline {
                 stage('micro-database-management') 
                    
                 {
+
+                    agent { label 'spp-m4c-002' }  
+
                     environment { 
                         svcname = "micro-database-management"
                         svcfolder = "standard\\server"
@@ -476,6 +484,9 @@ pipeline {
                 stage('tbw-taskbuilder') 
                    
                 {
+
+                    //agent { label 'spp-m4c-001' }  
+
                     environment { 
                         svcname = "tbw-taskbuilder"
                         svcfolder = "standard\\server"
