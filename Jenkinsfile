@@ -424,7 +424,7 @@ pipeline {
                   
                 {
                     agent { label 'spp-m4c-002' }  
-                  stage ('') {}
+                  stage ('') {
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
