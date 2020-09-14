@@ -7,6 +7,7 @@ pipeline {
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
       msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
       nugetpath = "${env.WORKSPACE}\\Standard\\Taskbuilder\\OtherComponents\\Nuget\\nuget.exe"
+      dcbpath = "${env.JENKINS_HOME}\\tools\\dcb.dll"
       config = 'Release'
       platform = 'x64'
       buildtype = "rebuild"
@@ -372,12 +373,127 @@ pipeline {
                     }			  
 					      }
 
+                stage('Publish menu-service') {
+                    environment { 
+                        svcname = "menu-service"
+                        svcfolder = "standard\\server"		 
+                        outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.svcname}"	   			
+                      }             
+                    steps {     
+                            dir ("${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}") {bat "del web.config"}
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}\\${env.svcname}.csproj -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
+			              //da provare in un prossimo passo -r linux-x64 -p:Version=1.2.0.64,AssemblyVersion=1.2.0.64  --no-self-contained
+                    }			  
+					      }
+
+                stage('Publish micro-database-management') {
+                    environment { 
+                        svcname = "micro-database-management"
+                        svcfolder = "standard\\server"		 
+                        outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.svcname}"	   			
+                      }             
+                    steps {     
+                            dir ("${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}") {bat "del web.config"}
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}\\${env.svcname}.csproj -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
+			              //da provare in un prossimo passo -r linux-x64 -p:Version=1.2.0.64,AssemblyVersion=1.2.0.64  --no-self-contained
+                    }			  
+					      }
+
+                stage('Publish web-server') {
+                    environment { 
+                        svcname = "web-server"
+                        svcfolder = "standard\\server"		 
+                        outputfolder = "standard\\Taskbuilder\\WebFramework\\${env.svcname}"	   			
+                      }             
+                    steps {     
+                            dir ("${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}") {bat "del web.config"}
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}\\${env.svcname}.csproj -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
+			              //da provare in un prossimo passo -r linux-x64 -p:Version=1.2.0.64,AssemblyVersion=1.2.0.64  --no-self-contained
+                    }			  
+					      }
 
 				    //le due parentesi che seguono chiudono lo stage parallel
                  }
               }
 
+          stage('Create Docker images') {
+            parallel{
+                stage('account-manager') 
+                   agent { label 'spp-m4c-002' }
+                {
+                    environment { 
+                        svcname = "account-manager"
+                        svcfolder = "standard\\server"
+                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        outputfolder = "buildartifacts\\${env.svcname}"	  			
+                      }             
+                    steps {    
+                          //esegue la copia dei file descritti in xml  
+                          bat "dotnet ${env.dcbpath} -c ${env.dcbxmlfilefpath} -s ${env.WORKSPACE} -d  ${env.WORKSPACE}\\${env.outputfolder}"
+                          powershell label: 'crea share di rete', script: 'if (-not (Test-Path "Q:\")) {net use Q: \\spp-m4c-001\\quicktest-buildartifacts /u:ccnet}'
+                          bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
+                          bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
+                    }			  
+					      }
+                stage('menu-service') 
+                   agent { label 'spp-m4c-002' }
+                {
+                    environment { 
+                        svcname = "menu-service"
+                        svcfolder = "standard\\server"
+                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        outputfolder = "buildartifacts\\${env.svcname}"	   			
+                                 }             
+                    steps {    
+                          //esegue la copia dei file descritti in xml  
+                          bat "dotnet ${env.dcbpath} -c ${env.dcbxmlfilefpath} -s ${env.WORKSPACE} -d  ${env.WORKSPACE}\\${env.outputfolder}"
+                          powershell label: 'crea share di rete', script: 'if (-not (Test-Path "Q:\")) {net use Q: \\spp-m4c-001\\quicktest-buildartifacts /u:ccnet}'
+                          bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
+                          bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
+                    }			  
+					      }
 
+                stage('micro-database-management') 
+                   agent { label 'spp-m4c-002' }
+                {
+                    environment { 
+                        svcname = "micro-database-management"
+                        svcfolder = "standard\\server"
+                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        outputfolder = "buildartifacts\\${env.svcname}"	   			
+                                 }             
+                    steps {    
+                          //esegue la copia dei file descritti in xml  
+                          bat "dotnet ${env.dcbpath} -c ${env.dcbxmlfilefpath} -s ${env.WORKSPACE} -d  ${env.WORKSPACE}\\${env.outputfolder}"
+                          powershell label: 'crea share di rete', script: 'if (-not (Test-Path "Q:\")) {net use Q: \\spp-m4c-001\\quicktest-buildartifacts /u:ccnet}'
+                          bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
+                          bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
+                    }			  
+					      }
+
+                stage('tbw-taskbuilder') 
+                   agent { label 'spp-m4c-002' }
+                {
+                    environment { 
+                        svcname = "tbw-taskbuilder"
+                        svcfolder = "standard\\server"
+                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        outputfolder = "buildartifacts\\${env.svcname}"	   			
+                                 }             
+                    steps {    
+                          //esegue la copia dei file descritti in ml  
+                          bat "dotnet ${env.dcbpath} -c ${env.dcbxmlfilefpath} -s ${env.WORKSPACE} -d  ${env.WORKSPACE}\\${env.outputfolder}"
+                          //copia il file entryhpint dell'immagine (dockerstart.ps1) 
+                          powershell label: 'copia il file entryhpint dell'immagine', script: 'Copy-Item -Path C:\CID\slnMago4Cloud\dockerstart.ps1 -Destination "${env.WORKSPACE}\\${env.outputfolder}"\\Apps\\TBApps\\Release'
+                          bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
+                          bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
+                    }			  
+					      }
+
+
+				    //le due parentesi che seguono chiudono lo stage parallel
+                 }
+              }
 
 			  
           stage('PostandTag') {
