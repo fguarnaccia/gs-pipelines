@@ -446,7 +446,9 @@ pipeline {
                   
                 {
                     agent { label 'spp-m4c-002' }  
-
+ stages {
+                    
+                    stage ('') {
                     environment { 
                         svcname = "menu-service"
                         svcfolder = "standard\\server"
@@ -460,14 +462,16 @@ pipeline {
                           bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
-					      }
+					      }}}
 
                 stage('micro-database-management') 
                    
                 {
 
                     agent { label 'spp-m4c-002' }  
-
+ stages {
+                    
+                    stage ('') {
                     environment { 
                         svcname = "micro-database-management"
                         svcfolder = "standard\\server"
@@ -482,13 +486,15 @@ pipeline {
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
 					      }
-
+ }}
                 stage('tbw-taskbuilder') 
                    
                 {
 
-                    //agent { label 'spp-m4c-001' }  
-
+                    agent { label 'spp-m4c-001' }  
+ stages {
+                    
+                    stage ('') {
                     environment { 
                         svcname = "tbw-taskbuilder"
                         svcfolder = "standard\\server"
@@ -504,8 +510,7 @@ pipeline {
                          // bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
 					      }
-
-
+ }}
 				    //le due parentesi che seguono chiudono lo stage parallel
                  }
               }
