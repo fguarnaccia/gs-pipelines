@@ -367,7 +367,7 @@ pipeline {
                       }             
                     steps {     
                             dir ("${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}") {bat "del web.config"}
-                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}\\ -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
+                            bat "dotnet publish --framework netcoreapp3.1 ${env.WORKSPACE}\\${env.svcfolder}\\${env.svcname}\\${env.svcname}.csproj -c release -o  ${env.WORKSPACE}\\${env.outputfolder} -p:Version=${env.version}.${env.BUILD_ID},AssemblyVersion=${env.version}.${env.BUILD_ID}"
 			              //da provare in un prossimo passo -r linux-x64 -p:Version=1.2.0.64,AssemblyVersion=1.2.0.64  --no-self-contained
                     }			  
 					      }
