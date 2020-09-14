@@ -196,158 +196,158 @@ pipeline {
                  }
               }    
 
-          stage('Build Dictionaries') {
+          stage('Dictionaries') {
             parallel{
-                stage('Dict TaskBuilderWeb') {
+                stage('Build TaskBuilderWeb') {
                     environment { 
-                        gitrepo = "tbw-taskBuilder"
-                        repofolder = "Standard\\Taskbuilder"
+                        prjname = "TaskBuilderWeb"
+                        prjfolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\TaskBuilderWeb.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
                         }
                  }
-                stage('Dict erp') {
+                stage('Build erp') {
                     environment { 
-                        gitrepo = "erp"
-                        repofolder = "Standard\\Applications\\erp"
+                        prjname = "erp"
+                        prjfolder = "Standard\\Applications\\erp"
                       }             
                     steps {                    
-                            bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
+                            bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                           }
                  } 				 
-                stage('Dict server') {
+                stage('Build server') {
                     environment { 
-                        gitrepo = "tbw-server"
-                        repofolder = "Standard\\server"
+                        prjname = "server"
+                        prjfolder = "Standard\\server"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\server.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
                         }
                 }    
-                stage('Dict client') {
+                stage('Build client') {
                     environment { 
-                        gitrepo = "tbw-client"
-                        repofolder = "Standard\\client"
+                        prjname = "client"
+                        prjfolder = "Standard\\client"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\client.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
                        }
                  }    
-                stage('Dict MDC') {
+                stage('Build MDC') {
                     environment { 
-                        gitrepo = "MDC"
-                        repofolder = "Standard\\Applications\\MDC"
+                        prjname = "MDC"
+                        prjfolder = "Standard\\Applications\\MDC"
                       }             
                     steps {                    
                         //dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln""" 
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln""" 
                         }
                  } 
-                stage('Dict Retail') {
+                stage('Build Retail') {
                     environment { 
-                        gitrepo = "Retail"
-                        repofolder = "Standard\\Applications\\Retail"
+                        prjname = "Retail"
+                        prjfolder = "Standard\\Applications\\Retail"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 
-                stage('Dict WMS') {
+                stage('Build WMS') {
                     environment { 
-                        gitrepo = "WMS"
-                        repofolder = "Standard\\Applications\\WMS"
+                        prjname = "WMS"
+                        prjfolder = "Standard\\Applications\\WMS"
                       }             
                     steps {                    
-                          bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
+                          bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 
-                stage('Dict WMSRetail') {
+                stage('Build WMSRetail') {
                     environment { 
-                        gitrepo = "WMSRetail"
-                        repofolder = "Standard\\Applications\\WMSRetail"
+                        prjname = "WMSRetail"
+                        prjfolder = "Standard\\Applications\\WMSRetail"
                       }             
                     steps {                    
-                         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.repofolder}\\${env.gitrepo}.tblsln"""
+                         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 				
 				//le due parentesi che seguono chiudono lo stage parallel
                  }
               }
-          stage('Build C++ Repos') {
+          stage('Build C++ Solutions') {
             stages{
                 stage('Build Taskbuilder') {
                     environment { 
-                        gitrepo = "tbw-taskBuilder"
-                        repofolder = "Standard\\Taskbuilder"		    			
+                        slnname = "taskbuilder"
+                        slnfolder = "Standard\\Taskbuilder"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore taskbuilder.sln"
-                                bat """\"${msbuildpath}\"  taskbuilder.sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat ".\\OtherComponents\\Nuget\\nuget.exe restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  ${env.slnname}.sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
 			
                 stage('Build erp') {
                     environment { 
-                        gitrepo = "erp"
-                        repofolder = "Standard\\Applications\\erp"		    			
+                        slnname = "erp"
+                        slnfolder = "Standard\\Applications\\erp"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
-                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat "${env.nugetpath} restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  "${env.slnname}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
                 stage('Build mdc') {
                     environment { 
-                        gitrepo = "mdc"
-                        repofolder = "Standard\\Applications\\mdc"		    			
+                        slnname = "mdc"
+                        slnfolder = "Standard\\Applications\\mdc"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
-                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat "${env.nugetpath} restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  "${env.slnname}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
 
                 stage('Build wms') {
                     environment { 
-                        gitrepo = "wms"
-                        repofolder = "Standard\\Applications\\wms"		    			
+                        slnname = "wms"
+                        slnfolder = "Standard\\Applications\\wms"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
-                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat "${env.nugetpath} restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  "${env.slnname}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
 
                 stage('Build retail') {
                     environment { 
-                        gitrepo = "retail"
-                        repofolder = "Standard\\Applications\\retail"		    			
+                        slnname = "retail"
+                        slnfolder = "Standard\\Applications\\retail"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
-                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat "${env.nugetpath} restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  "${env.slnname}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
                 stage('Build wmsretail') {
                     environment { 
-                        gitrepo = "wmsretail"
-                        repofolder = "Standard\\Applications\\wmsretail"		    			
+                        slnname = "wmsretail"
+                        slnfolder = "Standard\\Applications\\wmsretail"		    			
                       }             
                     steps {     
-                      dir ("${env.repofolder}") {
-                                bat "${env.nugetpath} restore ${env.gitrepo}.sln"
-                                bat """\"${msbuildpath}\"  "${env.gitrepo}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
+                      dir ("${env.slnfolder}") {
+                                bat "${env.nugetpath} restore ${env.slnname}.sln"
+                                bat """\"${msbuildpath}\"  "${env.slnname}".sln -t:${env.buildtype} -p:Configuration=${env.config} -p:Platform=${env.platform}"""
                               }
 			              }			  
 					      }
