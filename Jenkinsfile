@@ -15,7 +15,7 @@ pipeline {
       commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
     }
   
-    agent any 
+    agent none 
     stages {
           stage('PrepareFolders') { 
                 steps {
