@@ -15,7 +15,7 @@ pipeline {
       commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
     }
   
-    agent none 
+    agent any 
     stages {
           stage('PrepareFolders') { 
                 steps {
@@ -424,7 +424,9 @@ pipeline {
                   
                 {
                     agent { label 'spp-m4c-002' }  
-                  stage ('') {
+                  stages {
+                    
+                    stage ('') {
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
@@ -439,7 +441,7 @@ pipeline {
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
 					      }
-            }
+            }}
                 stage('menu-service') 
                   
                 {
