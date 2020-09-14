@@ -424,7 +424,7 @@ pipeline {
                     environment { 
                         svcname = "account-manager"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	  			
                       }             
                     steps {    
@@ -441,7 +441,7 @@ pipeline {
                     environment { 
                         svcname = "menu-service"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	   			
                                  }             
                     steps {    
@@ -459,7 +459,7 @@ pipeline {
                     environment { 
                         svcname = "micro-database-management"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	   			
                                  }             
                     steps {    
@@ -477,14 +477,14 @@ pipeline {
                     environment { 
                         svcname = "tbw-taskbuilder"
                         svcfolder = "standard\\server"
-                        dcbxmlfilefpath = "C:\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
+                        dcbxmlfilefpath = "C:\\CID\slnMago4Cloud\\${env.svcname}.DockerContextDefinition.xml"		 
                         outputfolder = "buildartifacts\\${env.svcname}"	   			
                                  }             
                     steps {    
                           //esegue la copia dei file descritti in ml  
                           bat "dotnet ${env.dcbpath} -c ${env.dcbxmlfilefpath} -s ${env.WORKSPACE} -d  ${env.WORKSPACE}\\${env.outputfolder}"
                           //copia il file entryhpint dell'immagine (dockerstart.ps1) 
-                          powershell label: 'copia il file entryhpint dell'immagine', script: 'Copy-Item -Path C:\CID\slnMago4Cloud\dockerstart.ps1 -Destination "${env.WORKSPACE}\\${env.outputfolder}"\\Apps\\TBApps\\Release'
+                          powershell label: 'copia il file entryhpint dell'immagine', script: 'Copy-Item -Path C:\\CID\\slnMago4Cloud\\dockerstart.ps1 -Destination "${env.WORKSPACE}\\${env.outputfolder}"\\Apps\\TBApps\\Release'
                           bat "docker login --username ${env.DockerLoginUsr} --password ${env.DockerLoginPwd}"
                           bat "docker build --build-arg version=${env.version}.${env.BUILD_ID} -t microarea/${env.svcname}:${env.tag} --pull=true --file=Q:\\${env.svcname}\\${env.svcname}-linux.dockerfile Q:\\account-manager\\"
                     }			  
