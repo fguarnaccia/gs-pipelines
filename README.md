@@ -8,4 +8,4 @@ La sintassi di default del Jenkinsfile sarà la: Declarative in caso di utilizzo
 
 https://www.jenkins.io/doc/book/pipeline/
 
-I jenkinsfile sono scritti per una determinata installazione di Jenkins pre cui sono specializzati in base ai sitemi operativi usati dal Master e dagli Agent.
+I jenkinsfile sono scritti per una determinata installazione di Jenkins per cui sono specializzati per i sistemi operativi usati dal Master e dagli Agent.
