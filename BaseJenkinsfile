@@ -36,7 +36,7 @@ pipeline {
                         branch = "${env.tbbranch}"  
                       }             
                     steps {
-                      powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: '''if (-not (Test-Path "${env.repofolder}" )) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'''
+                     // powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: '''if (-not (Test-Path "${env.repofolder}" )) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'''
                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
                  }  
                stage('Pull tbw-server') { 
