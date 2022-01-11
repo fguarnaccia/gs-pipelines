@@ -294,6 +294,17 @@ pipeline {
                  }
               }
 
+
+          stage('archive') {
+                when {
+                  environment name: 'tagongit', value: 'true'
+                }
+                steps {
+           dir('Apps') {
+                archiveArtifacts artifacts: '**'
+            }
+            }
+
 			  
           stage('PostandTag') {
                 when {
