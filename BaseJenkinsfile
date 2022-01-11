@@ -300,9 +300,10 @@ pipeline {
                   environment name: 'tagongit', value: 'true'
                 }
                 steps {
-           dir('Apps') {
-                archiveArtifacts artifacts: '**'
-            }
+                      dir('Apps') {
+                            archiveArtifacts artifacts: '**'
+                                 }
+                      }
             }
 
 			  
