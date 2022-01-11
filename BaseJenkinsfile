@@ -12,7 +12,7 @@ pipeline {
       platform = 'x64'
       buildtype = "rebuild"
       tagongit = 'true'     
-      commitmessage = "Jenkins tag on successfully build for ${env.tag} "  //git tag -a -m "Jenkins tag on successfully build for version $VERSION.$BUILDNUMB ($SUFFIX)" cloud/v$VERSION.$BUILDNUMB-$SUFFIX
+      commitmessage = "Jenkins tag on successfully build for ${env.tag} " 
     }
   
     agent any 
@@ -223,7 +223,7 @@ pipeline {
                         prjfolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                         }
                  }
                 stage('Build erp') {
@@ -241,7 +241,7 @@ pipeline {
                         prjfolder = "Standard\\server"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                         }
                 }    
                 stage('Build client') {
@@ -250,7 +250,7 @@ pipeline {
                         prjfolder = "Standard\\client"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  }    
                 stage('Build MDC') {
