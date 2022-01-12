@@ -224,7 +224,7 @@ pipeline {
                         prjfolder = "Standard\\Taskbuilder"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                         }
                  }
                 stage('Build erp') {
@@ -233,7 +233,7 @@ pipeline {
                         prjfolder = "Standard\\Applications\\erp"
                       }             
                     steps {                    
-                            bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                            bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                           }
                  } 				 
                 stage('Build server') {
@@ -242,7 +242,7 @@ pipeline {
                         prjfolder = "Standard\\server"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                         }
                 }    
                 stage('Build client') {
@@ -251,7 +251,7 @@ pipeline {
                         prjfolder = "Standard\\client"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  }    
                 stage('Build MDC') {
@@ -261,7 +261,7 @@ pipeline {
                       }             
                     steps {                    
                         //dir ("${env.repofolder}") { bat """"${env.internationalstudiopath}" "${env.gitrepo}".tblsln"""  }
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln""" 
+                        bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln""" 
                         }
                  } 
                 stage('Build Retail') {
@@ -270,7 +270,7 @@ pipeline {
                         prjfolder = "Standard\\Applications\\Retail"
                       }             
                     steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                        bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 
                 stage('Build WMS') {
@@ -279,7 +279,7 @@ pipeline {
                         prjfolder = "Standard\\Applications\\WMS"
                       }             
                     steps {                    
-                          bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                          bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 
                 stage('Build WMSRetail') {
@@ -288,7 +288,7 @@ pipeline {
                         prjfolder = "Standard\\Applications\\WMSRetail"
                       }             
                     steps {                    
-                         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                         bat """"${env.internationalstudiopath}" ${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
                        }
                  } 				
 				//le due parentesi che seguono chiudono lo stage parallel
