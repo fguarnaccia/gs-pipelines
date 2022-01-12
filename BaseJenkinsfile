@@ -295,6 +295,31 @@ pipeline {
                 //  }
               // }
 
+          stage('Tb-json') {
+              stages{
+                      stage('Publish Tb-json') {
+                          environment { 
+                              prjfolder = "Standard\\client\\tb-json"
+                              outputfolder = "Standard\\Taskbuilder\\Framework\\TbUtility\\TbJson"	   			
+                            }             
+                          steps {     
+                                  dir ("${env.WORKSPACE}\\${env.prjfolder}") 
+                                  bat "dotnet publish -r win-x64 -c release -o  ${env.WORKSPACE}\\${env.outputfolder}"
+                              }			  
+                      }
+            
+                      stage('Compact files') {
+                          environment { 
+                              prjfolder = "Standard\\Taskbuilder\\Framework\\TbUtility\\TbJson"	    
+                              outputfolder = "Apps\\TBApps\\Release"	   			
+                            }             
+                          steps {     
+                            dir ("${env.WORKSPACE}\\${env.prjfolder}") 
+                                { bat "TbJson.exe /compact ${env.WORKSPACE}\\${env.outputfolder}" }
+                          }			  
+                        }
+                }			  
+			      }
 
           stage('archive') {
                 when {
