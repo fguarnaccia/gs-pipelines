@@ -8,9 +8,6 @@ pipeline {
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
       msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
       nugetpath = "${env.WORKSPACE}\\Standard\\Taskbuilder\\OtherComponents\\Nuget\\nuget.exe"
-      config = 'Release'
-      platform = 'x64'
-      buildtype = "rebuild"
       tagongit = 'true'     
       commitmessage = "Jenkins tag ${env.tag} " 
     }
@@ -19,7 +16,7 @@ pipeline {
     stages {
           stage('PrepareFolders') { 
                 steps {
-                cleanWs deleteDirs: true
+                // cleanWs deleteDirs: true
                 powershell label: 'Create Standard folder', script: 'if (-not (Test-Path "Standard")) {New-Item -ItemType "directory" -Path "Standard"}'
                 powershell label: 'Create Applications folder', script: 'if (-not (Test-Path "Standard\\Applications")) {New-Item -ItemType "directory" -Path "Standard\\Applications"}'
                 powershell label: 'Create Apps folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'
@@ -303,8 +300,8 @@ pipeline {
                               outputfolder = "Standard\\Taskbuilder\\Framework\\TbUtility\\TbJson"	   			
                             }             
                           steps {     
-                                  dir ("${env.WORKSPACE}\\${env.prjfolder}") 
-                                  bat "dotnet publish -r win-x64 -c release -o  ${env.WORKSPACE}\\${env.outputfolder}"
+                                  dir ("${env.WORKSPACE}\\${env.prjfolder}") {
+                                  bat "dotnet publish -r win-x64 -c release -o  ${env.WORKSPACE}\\${env.outputfolder}"}
                               }			  
                       }
             
