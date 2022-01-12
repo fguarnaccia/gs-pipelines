@@ -15,7 +15,9 @@ pipeline {
       commitmessage = "Jenkins tag ${env.tag} " 
     }
   
-    agent  docker { image 'winbuilder' } 
+    agent  {
+    docker { image 'winbuilder' }  
+    }
     stages {
           stage('PrepareFolders') { 
                 steps {
