@@ -6,16 +6,16 @@ pipeline {
       erpbranch = "${env.tbbranch}"  
       tag = "${env.version}.${env.BUILD_ID}${env.suffix}"
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
-      // msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
-      // nugetpath = "${env.WORKSPACE}\\Standard\\Taskbuilder\\OtherComponents\\Nuget\\nuget.exe"
-      // config = 'Release'
-      // platform = 'x64'
-      // buildtype = "rebuild"
+      msbuildpath = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional\\MSBuild\\Current\\Bin\\msbuild.exe"
+      nugetpath = "${env.WORKSPACE}\\Standard\\Taskbuilder\\OtherComponents\\Nuget\\nuget.exe"
+      config = 'Release'
+      platform = 'x64'
+      buildtype = "rebuild"
       tagongit = 'true'     
       commitmessage = "Jenkins tag ${env.tag} " 
     }
   
-    agent  docker { image 'winbuilder' } 
+    agent any 
     stages {
           stage('PrepareFolders') { 
                 steps {
