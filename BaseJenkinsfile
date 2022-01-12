@@ -217,42 +217,46 @@ pipeline {
 
           stage('Dictionaries') {
             parallel{
-                stage('Build TaskBuilderWeb') {
-                    environment { 
-                        prjname = "TaskBuilderWeb"
-                        prjfolder = "Standard\\Taskbuilder"
-                      }             
-                    steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                        }
-                 }
-                stage('Build erp') {
-                    environment { 
-                        prjname = "erp"
-                        prjfolder = "Standard\\Applications\\erp"
-                      }             
-                    steps {                    
-                            bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                          }
-                 } 				 
-                stage('Build server') {
-                    environment { 
-                        prjname = "server"
-                        prjfolder = "Standard\\server"
-                      }             
-                    steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                        }
-                }    
-                stage('Build client') {
-                    environment { 
-                        prjname = "client"
-                        prjfolder = "Standard\\client"
-                      }             
-                    steps {                    
-                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                       }
-                 }    
+                // stage('Build TaskBuilderWeb') {
+                //     environment { 
+                //         prjname = "TaskBuilderWeb"
+                //         prjfolder = "Standard\\Taskbuilder"
+                //       }             
+                //     steps {                    
+                //         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                //         }
+                //  }
+
+                // stage('Build server') {
+                //     environment { 
+                //         prjname = "server"
+                //         prjfolder = "Standard\\server"
+                //       }             
+                //     steps {                    
+                //         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                //         }
+                // }
+
+                // stage('Build client') {
+                //     environment { 
+                //         prjname = "client"
+                //         prjfolder = "Standard\\client"
+                //       }             
+                //     steps {                    
+                //         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                //        }
+                //  } 
+
+                // stage('Build erp') {
+                //     environment { 
+                //         prjname = "erp"
+                //         prjfolder = "Standard\\Applications\\erp"
+                //       }             
+                //     steps {                    
+                //             bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                //           }
+                //  } 				 
+       
                 stage('Build MDC') {
                     environment { 
                         prjname = "MDC"
