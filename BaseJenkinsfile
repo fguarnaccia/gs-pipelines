@@ -215,7 +215,7 @@ pipeline {
                  }
               }    
 
-          stage('Dictionaries') 
+          // stage('Dictionaries') 
           // {
             // parallel{
                 stage('Build TaskBuilderWeb') {
