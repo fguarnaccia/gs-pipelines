@@ -269,24 +269,24 @@ pipeline {
                         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln""" 
                         }
                  } 
-                // stage('Build Retail') {
-                //     environment { 
-                //         prjname = "Retail"
-                //         prjfolder = "Standard\\Applications\\Retail"
-                //       }             
-                //     steps {                    
-                //         bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                //        }
-                //  } 
-                // stage('Build WMS') {
-                //     environment { 
-                //         prjname = "WMS"
-                //         prjfolder = "Standard\\Applications\\WMS"
-                //       }             
-                //     steps {                    
-                //           bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
-                //        }
-                //  } 
+                stage('Build Retail') {
+                    environment { 
+                        prjname = "Retail"
+                        prjfolder = "Standard\\Applications\\Retail"
+                      }             
+                    steps {                    
+                        bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                       }
+                 } 
+                stage('Build WMS') {
+                    environment { 
+                        prjname = "WMS"
+                        prjfolder = "Standard\\Applications\\WMS"
+                      }             
+                    steps {                    
+                          bat """"${env.internationalstudiopath}" "${env.WORKSPACE}\\${env.prjfolder}\\${env.prjname}.tblsln"""
+                       }
+                 } 
                 stage('Build WMSRetail') {
                     environment { 
                         prjname = "WMSRetail"
