@@ -292,7 +292,7 @@ pipeline {
                  } 				
 				//le due parentesi che seguono chiudono lo stage parallel
                 //  }
-              // }
+              }
 
 
           stage('archive') {
