@@ -1,0 +1,10 @@
+
+               stage('Pull and tag tbw-server') { 
+                    environment { 
+                        gitrepo = "tbw-server"
+                        repofolder = "Standard\\server"
+                        branch = "${env.tbbranch}"
+                      }   
+                    steps {
+                        dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
+                }    

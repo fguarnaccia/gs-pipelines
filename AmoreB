@@ -1,0 +1,45 @@
+pipeline {
+  environment   {
+      version = "0.0.0"
+      suffix = "-devnewpipe"
+      tbbranch = "develop"  
+      erpbranch = "${env.tbbranch}"
+      giturl= "https://github.com/Microarea/" 
+      tag = "${env.version}.${env.BUILD_ID}${env.suffix}"
+      internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
+      tagongit = 'true'     
+      commitmessage = "Jenkins tag ${env.BUILD_ID} ${env.tag}" 
+        }
+  
+    agent any 
+    stages {
+          stage('PrepareFolders') { 
+                steps {
+                // cleanWs deleteDirs: true
+                powershell label: 'Create Standard folder', script: 'if (-not (Test-Path "Standard")) {New-Item -ItemType "directory" -Path "Standard"}'
+                powershell label: 'Create Applications folder', script: 'if (-not (Test-Path "Standard\\Applications")) {New-Item -ItemType "directory" -Path "Standard\\Applications"}'
+                powershell label: 'Create Apps folder', script: 'if (-not (Test-Path "Apps")) {New-Item -ItemType "directory" -Path "Apps"}'
+                powershell label: 'Create BuildArtifacts folder', script: 'if (-not (Test-Path "buildartifacts")) {New-Item -ItemType "directory" -Path "buildartifacts"}'
+
+                }
+            }      
+          stage('Pull da git') {
+            parallel{
+          
+                load 'a'
+                load 'b'
+            }   
+        }
+         }
+	
+			  
+          stage('PostandTag') {
+                when {
+                  environment name: 'tagongit', value: 'true'
+                }
+                steps {
+                      echo "Built ${env.tag}" 
+                      echo "Msg ${commitmessage}"
+                }
+            }
+    }}
