@@ -27,7 +27,7 @@ pipeline {
              steps {
                 script {
                   scripts=load 'a'
-                  scripts='b'
+                  scripts=load 'b'
                 }   }
               
             }
