@@ -3,11 +3,12 @@ pipeline {
       version = "0.0.0"
       suffix = "-devnewpipe"
       tbbranch = "develop"  
-      erpbranch = "${env.tbbranch}"  
+      erpbranch = "${env.tbbranch}"
+      giturl= "https://github.com/Microarea/" 
       tag = "${env.version}.${env.BUILD_ID}${env.suffix}"
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
       tagongit = 'true'     
-      commitmessage = "Jenkins tag ${env.BUILD_ID} ${env.tag} " 
+      commitmessage = "Jenkins tag ${env.BUILD_ID} ${env.tag}" 
     }
   
     agent any 
@@ -24,186 +25,169 @@ pipeline {
             }      
           stage('Pull da git') {
             parallel{
-                stage('Pull tbw-taskBuilder') {
+                stage('Pull and tag tbw-taskBuilder') {
                     environment { 
                         gitrepo = "tbw-taskBuilder"
                         repofolder = "Standard\\Taskbuilder"
                         branch = "${env.tbbranch}"  
                       }             
                     steps {
-                     // powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: '''if (-not (Test-Path "${env.repofolder}" )) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'''
-                      dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                      dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
+                
                  }  
-               stage('Pull tbw-server') { 
+               stage('Pull and tag tbw-server') { 
                     environment { 
                         gitrepo = "tbw-server"
                         repofolder = "Standard\\server"
                         branch = "${env.tbbranch}"
                       }   
                     steps {
-                        //powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                        dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                        dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }     
-               stage('Pull tbw-client') { 
+               stage('Pull and tag tbw-client') { 
                     environment { 
                         gitrepo = "tbw-client"
                         repofolder = "Standard\\client"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                      // powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git"} }
                 }
-               stage('Pull ERP') {               
+               stage('Pull and tag ERP') {               
                     environment { 
                         gitrepo = "erp"
                         repofolder = "Standard\\Applications\\ERP"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-                stage('Pull MDC') {               
+                stage('Pull and tag MDC') {               
                     environment { 
                         gitrepo = "MDC"
                         repofolder = "Standard\\Applications\\MDC"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
  
                 }
-                stage('Pull TBF') {               
+                stage('Pull and tag TBF') {               
                     environment { 
                         gitrepo = "TBF"
                         repofolder = "Standard\\Applications\\TBF"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                      // powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-                stage('Pull mdm') {               
+                stage('Pull and tag mdm') {               
                     environment { 
                         gitrepo = "micro-database-management"
                         repofolder = "Standard\\micro-database-management"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-                stage('Pull M4_dashboard') {               
+                stage('Pull and tag M4_dashboard') {               
                     environment { 
                         gitrepo = "M4_dashboard"
                         repofolder = "Standard\\Applications\\M4_dashboard"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-		            stage('Pull Retail') {               
+		            stage('Pull and tag Retail') {               
                     environment { 
                         gitrepo = "Retail"
                         repofolder = "Standard\\Applications\\Retail"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-		            stage('Pull WMS') {               
+		            stage('Pull and tag WMS') {               
                     environment { 
                         gitrepo = "WMS"
                         repofolder = "Standard\\Applications\\WMS"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                    //   powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git"} }
                 }	
-	            	stage('Pull WMSRetail') {               
+	            	stage('Pull and tag WMSRetail') {               
                     environment { 
                         gitrepo = "WMSRetail"
                         repofolder = "Standard\\Applications\\WMSRetail"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                    //   powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }				
-		            stage('Pull MyMagoStudio') {               
+		            stage('Pull and tag MyMagoStudio') {               
                     environment { 
                         gitrepo = "MyMagoStudio"
                         repofolder = "Standard\\Applications\\MyMagoStudio"
                         branch = "${env.tbbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-		            stage('Pull DBCreationDlls-sqlserver') {               
+		            stage('Pull and tag DBCreationDlls-sqlserver') {               
                     environment { 
                         gitrepo = "DBCreationDlls-sqlserver"
                         repofolder = "Standard\\DBCreationDlls-sqlserver"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-		            stage('Pull DBCreationDlls-postgres') {               
+		            stage('Pull and tag DBCreationDlls-postgres') {               
                     environment { 
                         gitrepo = "DBCreationDlls-postgres"
                         repofolder = "Standard\\DBCreationDlls-postgres"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
-		            stage('Pull erp-model') {               
+		            stage('Pull and tag erp-model') {               
                     environment { 
                         gitrepo = "erp-model"
                         repofolder = "Standard\\erp-model"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                   //    powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git"} }
                 }
-		            stage('Pull erp-services') {               
+		            stage('Pull and tag erp-services') {               
                     environment { 
                         gitrepo = "erp-services"
                         repofolder = "Standard\\Applications\\erp-services"
                         branch = "${env.erpbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git"} }
                 }				
-		            stage('Pull Tbf-tools') {               
+		            stage('Pull and tag Tbf-tools') {               
                     environment { 
                         gitrepo = "Tbf-tools"
                         repofolder = "Standard\\Tbf-tools"
                         branch = "${env.tbbranch}"
                       }   
                     steps {
-                    //   powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }				
-		            stage('Pull Tbf-library') {               
+		            stage('Pull and tag Tbf-library') {               
                     environment { 
                         gitrepo = "Tbf-library"
                         repofolder = "Standard\\Tbf-library"
                         branch = "${env.tbbranch}"
                       }   
                     steps {
-                     //  powershell label: "Create ${env.repofolder} folder and pull ${env.gitrepo}", script: 'if (-not (Test-Path "${env.repofolder}")) {New-Item -ItemType "directory" -Path "${env.repofolder}"}'
-                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "https://github.com/Microarea/${env.gitrepo}.git" } }
+                       dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
                 }
 				
 				//le due parentesi che seguono chiudono lo stage parallel
