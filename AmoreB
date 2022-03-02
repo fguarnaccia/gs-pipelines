@@ -24,11 +24,11 @@ pipeline {
                 }
             }      
             stage('Pull da git') {
-             
+             steps {
                 script {
                   load 'a'
                   load 'b'
-                }   
+                }   }
               
             }
     }  
