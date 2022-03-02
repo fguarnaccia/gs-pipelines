@@ -26,8 +26,8 @@ pipeline {
             stage('Pull da git') {
              steps {
                 script {
-                  load 'a'
-                  load 'b'
+                  scripts=load 'a'
+                  scripts='b'
                 }   }
               
             }
