@@ -24,12 +24,12 @@ pipeline {
                 }
             }      
             stage('Pull da git') {
-              parallel{
+             
                 script {
                   load 'a'
                   load 'b'
                 }   
-              }
+              
             }
     }  
           stage('PostandTag') {
