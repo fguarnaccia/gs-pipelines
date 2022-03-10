@@ -32,7 +32,10 @@ pipeline {
                         branch = "${env.tbbranch}"  
                       }             
                     steps {
-                      dir ("${env.repofolder}") { git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" } }
+                      dir ("${env.repofolder}") { 
+                        git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" 
+                        git tag -a -m "${env.commitmessage}" dofg-tst/$tag'            
+                      } }
                 
                  }  
                stage('Pull and tag tbw-server') { 

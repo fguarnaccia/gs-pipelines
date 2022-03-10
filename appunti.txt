@@ -1,0 +1,10 @@
+MAGOVER=$(curl http://mail.microarea.it:8080/job/mc-develop/job/00--develop/lastSuccessfulBuild/buildNumber)
+
+
+        sh 'git tag -a -m "$GIT_REPO v. $TAG built successfully" cloud/v$TAG'
+        sh 'git config user.email $GITMAIL'
+        sh 'git config user.name $GITUSER'
+        sh 'git push https://$GITTOKEN@github.com/Microarea/$GIT_REPO.git cloud/v$TAG'
+
+
+        sh 'curl -X POST --data-urlencode "$SLACKPAYLOAD_SUCCESS" "$SLACKHOOK"'
