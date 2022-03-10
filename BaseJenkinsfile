@@ -1,14 +1,14 @@
 pipeline {
   environment   {
-      version = "0.0.0"
-      suffix = "-devnewpipe"
+      version = "2.0.0"
+      suffix = "-unstable"
       tbbranch = "develop"  
       erpbranch = "${env.tbbranch}"
+      tagongit = true
       giturl= "https://github.com/Microarea/" 
-      tag = "${env.version}.${env.BUILD_ID}${env.suffix}"
+      gittag = "cloud/v${env.version}.${env.BUILD_ID}${env.suffix}"
+      gitmsg = "Jenkins tag ${env.BUILD_ID} ${env.version}" 
       internationalstudiopath = "C:\\Program Files (x86)\\Microarea\\InternationalStudio\\InternationalStudio.exe"
-      tagongit = 'true'     
-      commitmessage = "Jenkins tag ${env.BUILD_ID} ${env.tag}" 
     }
   
     agent any 
@@ -34,9 +34,17 @@ pipeline {
                     steps {
                       dir ("${env.repofolder}") { 
                         git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" 
-                        powershell script: """git tag -a -m "${env.commitmessage}" dofg-tst/$tag"""
-                        powershell script: """git push "${env.giturl}${env.gitrepo}.git" dofg-tst/$tag"""
-                      } }
+                        // powershell script: """git tag -a -m "${env.gitmsg}" $gittag"""
+                        // powershell script: """git push "${env.giturl}${env.gitrepo}.git" $gittag"""
+                      } 
+                      script {            
+                                  if( tagongit ) {
+                                    echo "yes"
+                                  }
+                                  else {
+                                    echo "no!"    }
+                            }
+                      }
                 
                  }  
                stage('Pull and tag tbw-server') { 
@@ -318,8 +326,8 @@ pipeline {
                   environment name: 'tagongit', value: 'true'
                 }
                 steps {
-                      echo "Built ${env.tag}" 
-                      echo "Msg ${commitmessage}"
+                      echo "Built ${env.gittag}" 
+                      echo "Msg ${gitmsg}"
                 }
             }
     }}
