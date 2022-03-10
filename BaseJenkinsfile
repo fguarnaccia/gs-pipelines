@@ -4,7 +4,7 @@ pipeline {
       suffix = "-unstable"
       tbbranch = "develop"  
       erpbranch = "${env.tbbranch}"
-      tagongit = true
+      tagongit = false
       giturl= "https://github.com/Microarea/" 
       gittag = "cloud/v${env.version}.${env.BUILD_ID}${env.suffix}"
       gitmsg = "Jenkins tag ${env.BUILD_ID} ${env.version}" 
