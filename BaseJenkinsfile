@@ -34,7 +34,8 @@ pipeline {
                     steps {
                       dir ("${env.repofolder}") { 
                         git branch: env.branch, credentialsId: 'githubccnet', url: "${env.giturl}${env.gitrepo}.git" 
-                        git tag -a -m "${env.commitmessage}" dofg-tst/$tag'            
+                        git tag -a -m "${env.commitmessage}" dofg-tst/$tag 
+                        git push "${env.giturl}${env.gitrepo}.git" dofg-tst/$tag        
                       } }
                 
                  }  
