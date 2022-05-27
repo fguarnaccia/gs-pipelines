@@ -29,6 +29,15 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
+      - name: Output Run ID
+        run: echo ${{ github.run_id }}
+      - name: Output Run Number
+        run: echo ${{ github.run_number }}
+      - name: Output Run Attempt
+        run: echo ${{ github.run_attempt }}
+
+
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
