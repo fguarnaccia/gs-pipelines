@@ -39,6 +39,6 @@ jobs:
           name: save jenkinsfile
           path: 
              ./Jenkinsfile
-jobs:
+             
       - name: Say Hello
         run: echo Hello Fabio
