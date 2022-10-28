@@ -1,5 +1,5 @@
 # gs-pipelines
-Prototipo per un nuovo repo contenente Jenkinsfile  di compilazione MagoCloud. 
+Prototipo per un nuovo repo contenente Jenkinsfile di compilazione MagoCloud. 
 L'idea di fondo è avere un branch per ogni pipeline contenente il proprio Jenkinsfile configurato per pullare, compilare, pushare un'intera pipeline di MagoCloud.
 Ogni nuova pipeline nascerebbe come clone di un branch specifico (il più aggiornato!?).
 I branch avranno come prefisso la stringa "pipe" giusto per distinguere eventuali branch di implementazione su questo repo stesso. 
