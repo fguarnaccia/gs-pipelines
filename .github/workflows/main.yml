@@ -44,5 +44,7 @@ jobs:
         run: echo Hello Fabio
 
       - name: downcase REPO
-        run: |
-          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+        run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - run: echo${{ github.MYREPO }} 
+
