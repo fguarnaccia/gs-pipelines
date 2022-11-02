@@ -55,8 +55,6 @@ jobs:
 
       # - run: echo${{ github.MYREPO }} 
 
-jobs:
-
   alfa:
 
     runs-on: self-hosted
