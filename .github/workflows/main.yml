@@ -78,5 +78,5 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: shows alfa job variable
-      run: echo "${needs.alfa.outputs.imagetag}" 
+      run: echo "${{needs.alfa.outputs.imagetag}}" 
     
