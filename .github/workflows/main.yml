@@ -32,20 +32,6 @@ jobs:
   #         cd hello
   #         pwd    
 
-  Alfa:
-
-    steps:
-
-       - name: downcase REPO
-         run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-
-  Bravo:  
-
-    steps:
-
-       - name: Show var downcase REPO
-         run: echo "${env.jobs.alfa.outputs.MYREPO}"
-
       # - name: Output Run ID
       #   run: echo ${{ github.run_id }}
       # - name: Output Run Number
@@ -68,3 +54,31 @@ jobs:
       #   run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
       # - run: echo${{ github.MYREPO }} 
+
+jobs:
+
+  alfa:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: downcase REPO
+      run: echo "lowerrepo=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+    outputs:
+     iamgetag: ${{ steps.alfa.outputs.lowerrepo }}
+
+
+  bravo:
+    needs: alfa
+
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: downcase REPO
+      run: echo "${needs.alfa.outputs.lowerrepo}" 
+    
