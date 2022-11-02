@@ -25,26 +25,33 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: Output Run ID
-        run: echo ${{ github.run_id }}
-      - name: Output Run Number
-        run: echo ${{ github.run_number }}
-      - name: Output Run Attempt
-        run: echo ${{ github.run_attempt }}
+      # - name: Output Run ID
+      #   run: echo ${{ github.run_id }}
+      # - name: Output Run Number
+      #   run: echo ${{ github.run_number }}
+      # - name: Output Run Attempt
+      #   run: echo ${{ github.run_attempt }}
 
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: save jenkinsfile
-          path: 
-             ./Jenkinsfile
+      # - name: Archive production artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: save jenkinsfile
+      #     path: 
+      #        ./Jenkinsfile
              
-      - name: Say Hello
-        run: echo Hello Fabio
+      # - name: Say Hello
+      #   run: echo Hello Fabio
 
-      - name: downcase REPO
-        run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      # - name: downcase REPO
+      #   run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
-      - run: echo${{ github.MYREPO }} 
+      # - run: echo${{ github.MYREPO }} 
 
+
+    - name: Experiment
+      run: |
+        pwd             # /home/runner/work/try/try
+        mkdir hello
+        cd hello
+        pwd    
