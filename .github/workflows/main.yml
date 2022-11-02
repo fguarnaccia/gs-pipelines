@@ -55,11 +55,3 @@ jobs:
       #   run: echo "MYREPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
       # - run: echo${{ github.MYREPO }} 
-
-
-    - name: Experiment
-      run: |
-        pwd             # /home/runner/work/try/try
-        mkdir hello
-        cd hello
-        pwd    
