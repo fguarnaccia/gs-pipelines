@@ -10,4 +10,4 @@ assignees: fguarnaccia
 INSTANCE:  %istanza%
 SNAPSHOT: %snapshot%
 SUBSCRIPTIOM: 
-IMPACT: 
+IMPACT:
